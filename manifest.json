@@ -1,6 +1,6 @@
 {
   "homeAssistantVersion": "2023.7.0",
   "componentPaths": [
-    "./dist/test-component.js"
+    "./dist/layout.es.js"
   ]
 }
