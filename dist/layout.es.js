@@ -1,6 +1,6 @@
 import { jsx as r } from "react/jsx-runtime";
-import { DropZone as p } from "@measured/puck";
-const o = [
+import { DropZone as o } from "@measured/puck";
+const p = [
   { label: "Center", value: "center" },
   { label: "Flex End", value: "flex-end" },
   { label: "Flex Start", value: "flex-start" },
@@ -15,17 +15,19 @@ const o = [
   { label: "Space Between", value: "space-between" },
   { label: "Space Evenly", value: "space-evenly" },
   { label: "Stretch", value: "stretch" }
-], u = [
+], i = [
   { label: "No Wrap", value: "nowrap" },
   { label: "Wrap", value: "wrap" },
   { label: "Wrap Reverse", value: "wrap-reverse" }
-], i = [
+], u = [
   { label: "Row", value: "row" },
   { label: "Row Reverse", value: "row-reverse" },
   { label: "Column", value: "column" },
   { label: "Column Reverse", value: "column-reverse" }
-], v = {
+], d = {
   label: "Layout",
+  version: "1.0.0",
+  description: "A layout component that can be used to arrange child components in a grid or flex layout.",
   fields: {
     options: {
       type: "object",
@@ -34,12 +36,12 @@ const o = [
         direction: {
           type: "radio",
           label: "Direction",
-          options: i
+          options: u
         },
         alignItems: {
           type: "select",
           label: "Align Items",
-          options: o
+          options: p
         },
         justifyContent: {
           type: "select",
@@ -49,7 +51,7 @@ const o = [
         wrap: {
           type: "select",
           label: "Wrap",
-          options: u
+          options: i
         },
         gap: {
           type: "number",
@@ -71,7 +73,7 @@ const o = [
   render: ({ puck: a, options: e }) => {
     const l = e.gap ?? 0, t = e.padding ?? 0, n = e.margin ?? 0;
     return /* @__PURE__ */ r(
-      p,
+      o,
       {
         ref: a.dragRef,
         minEmptyHeight: 200,
@@ -92,5 +94,5 @@ const o = [
   }
 };
 export {
-  v as default
+  d as default
 };

@@ -43,6 +43,8 @@ export type LayoutProps = {
 
 export default {
   label: 'Layout',
+  version: '1.0.0',
+  description: 'A layout component that can be used to arrange child components in a grid or flex layout.',
   fields: {
     options: {
       type: 'object',
@@ -108,4 +110,7 @@ export default {
       />
     );
   },
-} satisfies ComponentConfig<LayoutProps>;
+} satisfies ComponentConfig<LayoutProps> & {
+  description: string;
+  version: string;
+};
