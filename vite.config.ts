@@ -24,7 +24,7 @@ export default defineConfig({
         'react-dom',
         // If you have another package that is already in the host project,
         // add it here as well, e.g. 'some-other-package'
-        '@measured/puck'
+        // '@measured/puck'
       ],
       output: {
         // Provide global variables to use in the UMD build
