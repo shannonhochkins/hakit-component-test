@@ -6,6 +6,9 @@ const libraryName = 'Layout';
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  },
   mode: 'production',
   build: {
     lib: {
