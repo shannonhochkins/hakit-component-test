@@ -1,4 +1,4 @@
-// import { DropZone, ComponentConfig } from '@measured/puck';
+import { DropZone, ComponentConfig } from '@measured/puck';
 const ALIGN_ITEMS = [
   { label: 'Center', value: 'center' },
   { label: 'Flex End', value: 'flex-end' },
@@ -87,11 +87,30 @@ export default {
     },
   },
   inline: true,
-  render: () => {
+  render: ({ puck, options }) => {
+    const gap = options.gap ?? 0;
+    const padding = options.padding ?? 0;
+    const margin = options.margin ?? 0;
     return (
-      <div>
-        APPLES
-      </div>
+      <DropZone
+        ref={puck.dragRef}
+        minEmptyHeight={200}
+        zone={'layout'}
+        style={{
+          gap: `${gap}px`,
+          flexDirection: options.direction ?? 'row',
+          flexWrap: options.wrap ?? 'wrap',
+          justifyContent: options.justifyContent ?? 'center',
+          alignItems: options.alignItems ?? 'center',
+          ['--stretch' as unknown as string]: options.justifyContent === 'stretch' ? '100%' : 'false',
+          ['--gap' as unknown as string]: `${gap}px`,
+          padding: `${padding}px`,
+          margin: `${margin}px`,
+        }}
+      />
     );
   },
-}
+} satisfies ComponentConfig<LayoutProps> & {
+  description: string;
+  version: string;
+};
