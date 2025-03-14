@@ -6,6 +6,7 @@ const libraryName = 'Layout';
 
 export default defineConfig({
   plugins: [react()],
+  mode: 'production',
   build: {
     lib: {
       // The entry point for your library
@@ -14,15 +15,13 @@ export default defineConfig({
       name: libraryName,
       formats: ['es'],
       // The default file name for the output (e.g. my-plugin.umd.js, my-plugin.es.js, etc.)
-      fileName: (format) => `layout.${format}.js`,
+      fileName: (format) => `plugin.${format}.js`,
     },
     rollupOptions: {
       // Indicate which deps should remain external to the bundle.
       external: [
         'react',
         'react-dom',
-        'react/jsx-runtime',
-        'react/jsx-dev-runtime',
         // If you have another package that is already in the host project,
         // add it here as well, e.g. 'some-other-package'
         '@measured/puck'
@@ -34,8 +33,6 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
           '@measured-puck': '@measured/puck',
-          'react/jsx-runtime': 'ReactJsxRuntime',
-          'react/jsx-dev-runtime': 'ReactJsxDevRuntime',
         },
       },
     },
