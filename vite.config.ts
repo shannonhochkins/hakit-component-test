@@ -13,12 +13,12 @@ export default defineConfig({
   build: {
     lib: {
       // The entry point for your library
-      entry: 'src/index.tsx',
+      entry: 'src/components/Slider/index.tsx',
       // The name of the global variable when you build in UMD or iife formats
       name: libraryName,
       formats: ['es'],
       // The default file name for the output (e.g. my-plugin.umd.js, my-plugin.es.js, etc.)
-      fileName: (format) => `plugin.${format}.js`,
+      fileName: () => `slider.js`,
     },
     rollupOptions: {
       // Indicate which deps should remain external to the bundle.
@@ -28,6 +28,11 @@ export default defineConfig({
         // If you have another package that is already in the host project,
         // add it here as well, e.g. 'some-other-package'
         // '@measured/puck'
+        '@hakit/components',
+        '@hakit/core',
+        'framer-motion',
+        'uuid',
+
       ],
       output: {
         // Provide global variables to use in the UMD build
@@ -35,7 +40,6 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          '@measured-puck': '@measured/puck',
         },
       },
     },
