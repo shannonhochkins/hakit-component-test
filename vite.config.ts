@@ -30,7 +30,6 @@ export default defineConfig({
         // '@measured/puck'
         '@hakit/components',
         '@hakit/core',
-        'framer-motion',
         'uuid',
 
       ],
