@@ -29,8 +29,8 @@ export default defineConfig({
         // If you have another package that is already in the host project,
         // add it here as well, e.g. 'some-other-package'
         // '@measured/puck'
-        '@emotion/styled',
-        '@emotion/react',
+        // '@emotion/styled',
+        // '@emotion/react',
         '@hakit/components',
         '@hakit/core',
         'uuid',

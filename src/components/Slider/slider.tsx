@@ -1,20 +1,20 @@
 import { motion, type MotionProps, Variants, type PanInfo } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback, ComponentPropsWithoutRef } from 'react';
-import styled from '@emotion/styled';
+// import styled from '@emotion/styled';
 import { useResizeDetector } from 'react-resize-detector';
 import { FabCard } from '@hakit/components';
 import { type SliderProps } from '.';
 // import { DropZone } from '@measured/puck';
 // import { usePuckData } from '@editor/hooks/usePuckData';
 
-const CardBase = styled(motion.div)`
-  height: 100%;
-  max-height: 65vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-`;
+// const CardBase = styled(motion.div)`
+//   height: 100%;
+//   max-height: 65vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+// `;
 type Extendable = MotionProps & ComponentPropsWithoutRef<'div'>;
 interface CardProps extends Extendable {
   index: number;
@@ -30,53 +30,60 @@ function Card({ index, onSizeChange, ...rest }: CardProps) {
       onSizeChange(index, width, height);
     },
   });
-  return <CardBase ref={ref} {...rest} />;
+  return <motion.div style={{
+    height: '100%',
+    maxHeight: '65vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  }} ref={ref} {...rest} />;
 }
 
-const MainWrapper = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  height: 100%;
-  .wrapper {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-  }
-  .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 50%;
-    pointer-events: none;
-    z-index: 3;
-    button {
-      &:not(:disabled),
-      &:not(.disabled) {
-        pointer-events: auto;
-      }
-      top: 0;
-      &:first-of-type {
-        position: absolute;
-        left: 0;
-        translate: 50% -50%;
-      }
-      &:last-of-type {
-        position: absolute;
-        right: 0;
-        translate: -50% -50%;
-      }
-    }
-  }
-`;
+// const MainWrapper = styled(motion.div)`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   width: 100%;
+//   height: 100%;
+//   .wrapper {
+//     display: flex;
+//     height: 100%;
+//     align-items: center;
+//     justify-content: flex-start;
+//     width: 100%;
+//   }
+//   .buttons {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 100%;
+//     position: fixed;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     top: 50%;
+//     pointer-events: none;
+//     z-index: 3;
+//     button {
+//       &:not(:disabled),
+//       &:not(.disabled) {
+//         pointer-events: auto;
+//       }
+//       top: 0;
+//       &:first-of-type {
+//         position: absolute;
+//         left: 0;
+//         translate: 50% -50%;
+//       }
+//       &:last-of-type {
+//         position: absolute;
+//         right: 0;
+//         translate: -50% -50%;
+//       }
+//     }
+//   }
+// `;
 
 interface CustomProps {
   activeIndex: number;
@@ -240,7 +247,7 @@ export const ContextSlider = ({
   };
 
   return (
-    <MainWrapper
+    <motion.div
       ref={ref}
       dragElastic={0}
       dragMomentum={false}
@@ -335,6 +342,6 @@ export const ContextSlider = ({
           onClick={() => changePage(1)}
         />
       </div>
-    </MainWrapper>
+    </motion.div>
   );
 };
