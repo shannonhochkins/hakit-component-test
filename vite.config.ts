@@ -19,9 +19,9 @@ export default defineConfig({
       },
       // Modules to expose
       exposes: {
-          './Slider': './src/components/Slider',
+          './Layout': './src/',
       },
-      shared: ['react', 'react-dom', '@hakit/components', 'uuid', 'framer-motion'],
+      shared: ['react', 'react-dom'],
       // mode: 'development',
     })
   ],
