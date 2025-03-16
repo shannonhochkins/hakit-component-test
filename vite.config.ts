@@ -14,6 +14,9 @@ export default defineConfig({
     federation({
       name: 'Testing',
       filename: 'remoteEntry.js',
+      remotes: {
+        remoteName: '',
+      },
       // Modules to expose
       exposes: {
           './Slider': './src/components/Slider',
