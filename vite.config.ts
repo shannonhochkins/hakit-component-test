@@ -24,8 +24,8 @@ export default defineConfig({
       // Indicate which deps should remain external to the bundle.
       external: [
         'react',
-        'react-dom',
-        'react/jsx-runtime',
+        // 'react-dom',
+        // 'react/jsx-runtime',
         // If you have another package that is already in the host project,
         // add it here as well, e.g. 'some-other-package'
         // '@measured/puck'
