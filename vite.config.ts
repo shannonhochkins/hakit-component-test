@@ -25,9 +25,12 @@ export default defineConfig({
       external: [
         'react',
         'react-dom',
+        'react/jsx-runtime',
         // If you have another package that is already in the host project,
         // add it here as well, e.g. 'some-other-package'
         // '@measured/puck'
+        '@emotion/styled',
+        '@emotion/react',
         '@hakit/components',
         '@hakit/core',
         'uuid',
@@ -39,6 +42,7 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime',
         },
       },
     },
