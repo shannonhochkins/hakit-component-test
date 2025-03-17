@@ -22,7 +22,7 @@ export interface SliderProps {
 }
 
 
-const component = {
+export default {
   category: 'Misc',
   label: 'Slider',
   version: '1.0.0',
@@ -119,16 +119,14 @@ const component = {
   },
   inline: true,
   permissions: {
-    drag: false,
-    delete: false,
+    drag: true,
+    delete: true,
     duplicate: false,
-    insert: false,
+    insert: true,
   },
-  render({ puck, options, slides = [] }) {
+  render({ dragRef, options, slides = [] }) {
     const slidesWithId = slides
       .filter(slide => slide.id && slide.id.length > 0);
-    return <ContextSlider options={options} slides={slidesWithId} ref={puck.dragRef} />;
+    return <ContextSlider options={options} slides={slidesWithId} ref={dragRef} />;
   },
 }
-
-export default component;

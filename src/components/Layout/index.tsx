@@ -1,8 +1,7 @@
-import { DropZone } from '@measured/puck';
-import { DROPZONE_NAMES, DROPZONE_SIZE } from '@editor/constants';
-import { createComponent } from '@editor/components';
+// import { DROPZONE_NAMES, DROPZONE_SIZE } from '@editor/constants';
+// import { createComponent } from '@editor/components';
 
-import { dataToTheme } from '@editor/puck/EditorComponents/Form/definitions/size';
+// import { dataToTheme } from '@editor/puck/EditorComponents/Form/definitions/size';
 
 const ALIGN_ITEMS = [
   { label: 'Center', value: 'center' },
@@ -46,7 +45,7 @@ export type LayoutProps = {
   };
 };
 
-const component = createComponent<LayoutProps>({
+export default {
   label: 'Layout',
   category: 'Layout',
   fields: {
@@ -111,19 +110,17 @@ const component = createComponent<LayoutProps>({
     },
   },
   inline: true,
-  render: ({ puck, options, activeBreakpoint, sizeOptions }) => {
-    const { styles, className } = dataToTheme(sizeOptions, activeBreakpoint);
+  render: ({ dragRef, DropZone, options, activeBreakpoint, sizeOptions }) => {
+    // const { styles, className } = dataToTheme(sizeOptions, activeBreakpoint);
     const gap = options.gap ?? 0;
     const padding = options.padding ?? 0;
     const margin = options.margin ?? 0;
     return (
       <DropZone
-        ref={puck.dragRef}
-        minEmptyHeight={DROPZONE_SIZE.layout}
-        zone={DROPZONE_NAMES.layout}
-        className={className}
+        ref={dragRef}
+        minEmptyHeight={200}
+        zone={'layout'}
         style={{
-          ...styles,
           gap: `${gap}px`,
           flexDirection: options.direction ?? 'row',
           flexWrap: options.wrap ?? 'wrap',
@@ -137,5 +134,4 @@ const component = createComponent<LayoutProps>({
       />
     );
   },
-});
-export default component;
+}

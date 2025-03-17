@@ -1,7 +1,3 @@
-function getDefaultExportFromCjs (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
 var react = {exports: {}};
 
 var react_production = {};
@@ -562,4 +558,4 @@ function requireReact () {
 	return react.exports;
 }
 
-export { getDefaultExportFromCjs as g, requireReact as r };
+export { requireReact as r };

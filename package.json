@@ -4,15 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5001 --strictPort",
     "type-check": "tsc -b",
     "build": "NODE_ENV=production vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --port 5001 --strictPort",
+    "serve": "vite preview --port 5001 --strictPort"
   },
   "dependencies": {
     "@hakit/components": "^5.0.8",
     "@hakit/core": "^5.0.8",
+    "@measured/puck": "^0.18.2",
     "framer-motion": "^12.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

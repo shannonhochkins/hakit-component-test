@@ -2,10 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react';
 import federation from "@originjs/vite-plugin-federation";
 
-// const ENTRIES = {
-
-// }
-
 // https://vite.dev/config/
 
 export default defineConfig({
@@ -16,10 +12,13 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       // Modules to expose
       exposes: {
-          './Layout': './src/',
+          './Layout': './src/components/Layout',
+          './Slider': './src/components/Slider',
+          './Navigation': './src/components/Navigation',
+          './Background': './src/components/Background',
+          './Root': './src/components/Root',
       },
-      shared: ['react', 'react-dom'],
-      // mode: 'development',
+      shared: ['react', 'react-dom', '@hakit/core', '@hakit/components', 'uuid', 'framer-motion', '@measured/puck', '@emotion/styled', '@emotion/react'],
     })
   ],
   build: {
@@ -27,11 +26,8 @@ export default defineConfig({
     target: 'esnext',
     minify: false,
     cssCodeSplit: false,
-    // lib: {
-    //   entry: './src/components/Slider',
-    //   name: 'Testing',
-    //   formats: ['es'], // or 'umd', etc.
-    //   fileName: (format) => `remote-${format}.js`
-    // },
+    rollupOptions: {
+      // external: ['@emotion/react', '@emotion/styled']
+    }
   }
 });

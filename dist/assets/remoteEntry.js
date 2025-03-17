@@ -3,7 +3,19 @@ const currentImports = {};
       let moduleMap = {
 "./Layout":()=>{
       dynamicLoadingCss([], false, './Layout');
-      return __federation_import('./__federation_expose_Layout-CnN1Lh97.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
+      return __federation_import('./__federation_expose_Layout-BVCAQUqu.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},
+"./Slider":()=>{
+      dynamicLoadingCss([], false, './Slider');
+      return __federation_import('./__federation_expose_Slider-74Bg88B7.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},
+"./Navigation":()=>{
+      dynamicLoadingCss([], false, './Navigation');
+      return __federation_import('./__federation_expose_Navigation-BbXZ5h0O.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},
+"./Background":()=>{
+      dynamicLoadingCss([], false, './Background');
+      return __federation_import('./__federation_expose_Background-BjjUvWCy.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},
+"./Root":()=>{
+      dynamicLoadingCss([], false, './Root');
+      return __federation_import('./__federation_expose_Root-DanswQa-.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
       const seen = {};
       const dynamicLoadingCss = (cssFilePaths, dontAppendStylesToHead, exposeItemName) => {
         const metaUrl = import.meta.url;

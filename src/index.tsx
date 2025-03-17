@@ -1,4 +1,3 @@
-// import { DropZone, ComponentConfig } from '@measured/puck';
 const ALIGN_ITEMS = [
   { label: 'Center', value: 'center' },
   { label: 'Flex End', value: 'flex-end' },
