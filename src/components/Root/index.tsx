@@ -212,16 +212,14 @@ export default {
     const setWindowContext = useStore(store => store.setWindowContext);
     const windowContext = useStore(store => store.windowContext);
     const container = editMode ? editorFrame : document.head;
-    const viewports = useViewports(data);
-    const breakpoints = useMemo(() => toBreakpoints(viewports), [viewports]);
+    // const viewports = useViewports(data);
+    // const breakpoints = useMemo(() => toBreakpoints(viewports), [viewports]);
 
     useEffect(() => {
-      const newWindowContext = (container as HTMLIFrameElement).contentWindow as Window;
-      if (editMode && windowContext !== newWindowContext && hasSetWindowContext.current === false) {
+      const newWindowContext = (container as HTMLIFrameElement)?.contentWindow as Window;
+      if (editMode && windowContext !== newWindowContext && hasSetWindowContext.current === false && typeof newWindowContext !== 'undefined' && newWindowContext) {
         setWindowContext(newWindowContext);
-        setTimeout(() => {
-          hasSetWindowContext.current = true;
-        })
+        hasSetWindowContext.current = true;
       }
     }, [container, editMode, windowContext, setWindowContext]);
 
@@ -238,15 +236,13 @@ export default {
     if (editMode && !hasSetWindowContext.current) {
       return <></>;
     }
-    console.log('breakpoints', windowContext, breakpoints);
-    debugger;
     return <>
       <ThemeProvider
-        emotionCache={{
-          key: 'fuck',
-          container: windowContext.document.head,
-        }}
         // breakpoints={breakpoints}
+        // emotionCache={{
+        //   key: 'css',
+        //   container: iframe.contentDocument?.head,
+        // }}
         hue={data.root.props?.theme?.hue}
         saturation={data.root.props?.theme?.saturation}
         lightness={data.root.props?.theme?.lightness}
@@ -255,15 +251,15 @@ export default {
         darkMode={data.root.props?.theme?.darkMode}
         globalStyles={`
         --ha-hide-body-overflow-y: hidden;
-      `}
-      />
-      <DropZone zone={'default-zone'} style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        // stretch the children
-        alignItems: 'stretch',
-      }} />
+      `}>
+        <DropZone zone={'default-zone'} style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          // stretch the children
+          alignItems: 'stretch',
+        }} />
+      </ThemeProvider>
     </>
   },
 }

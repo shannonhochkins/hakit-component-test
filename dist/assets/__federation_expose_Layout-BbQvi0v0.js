@@ -1,33 +1,69 @@
-import { j as jsxRuntimeExports } from './jsx-runtime-XI9uIe3W.js';
+import { j as jsx } from './emotion-react-jsx-runtime.browser.esm-DGwdlQJW.js';
 
-const ALIGN_ITEMS = [
-  { label: "Center", value: "center" },
-  { label: "Flex End", value: "flex-end" },
-  { label: "Flex Start", value: "flex-start" },
-  { label: "Stretch", value: "stretch" }
-];
-const JUSTIFY_CONTENT = [
-  { label: "Center", value: "center" },
-  { label: "End", value: "end" },
-  { label: "Flex End", value: "flex-end" },
-  { label: "Flex Start", value: "flex-start" },
-  { label: "Start", value: "start" },
-  { label: "Space Around", value: "space-around" },
-  { label: "Space Between", value: "space-between" },
-  { label: "Space Evenly", value: "space-evenly" },
-  { label: "Stretch", value: "stretch" }
-];
-const WRAP = [
-  { label: "No Wrap", value: "nowrap" },
-  { label: "Wrap", value: "wrap" },
-  { label: "Wrap Reverse", value: "wrap-reverse" }
-];
-const DIRECTION = [
-  { label: "Row", value: "row" },
-  { label: "Row Reverse", value: "row-reverse" },
-  { label: "Column", value: "column" },
-  { label: "Column Reverse", value: "column-reverse" }
-];
+const ALIGN_ITEMS = [{
+  label: "Center",
+  value: "center"
+}, {
+  label: "Flex End",
+  value: "flex-end"
+}, {
+  label: "Flex Start",
+  value: "flex-start"
+}, {
+  label: "Stretch",
+  value: "stretch"
+}];
+const JUSTIFY_CONTENT = [{
+  label: "Center",
+  value: "center"
+}, {
+  label: "End",
+  value: "end"
+}, {
+  label: "Flex End",
+  value: "flex-end"
+}, {
+  label: "Flex Start",
+  value: "flex-start"
+}, {
+  label: "Start",
+  value: "start"
+}, {
+  label: "Space Around",
+  value: "space-around"
+}, {
+  label: "Space Between",
+  value: "space-between"
+}, {
+  label: "Space Evenly",
+  value: "space-evenly"
+}, {
+  label: "Stretch",
+  value: "stretch"
+}];
+const WRAP = [{
+  label: "No Wrap",
+  value: "nowrap"
+}, {
+  label: "Wrap",
+  value: "wrap"
+}, {
+  label: "Wrap Reverse",
+  value: "wrap-reverse"
+}];
+const DIRECTION = [{
+  label: "Row",
+  value: "row"
+}, {
+  label: "Row Reverse",
+  value: "row-reverse"
+}, {
+  label: "Column",
+  value: "column"
+}, {
+  label: "Column Reverse",
+  value: "column-reverse"
+}];
 const index = {
   label: "Layout",
   category: "Layout",
@@ -93,29 +129,27 @@ const index = {
     }
   },
   inline: true,
-  render: ({ dragRef, DropZone, options, activeBreakpoint, sizeOptions }) => {
+  render: ({
+    dragRef,
+    DropZone,
+    options,
+    activeBreakpoint,
+    sizeOptions
+  }) => {
     const gap = options.gap ?? 0;
     const padding = options.padding ?? 0;
     const margin = options.margin ?? 0;
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DropZone,
-      {
-        ref: dragRef,
-        minEmptyHeight: 200,
-        zone: "layout",
-        style: {
-          gap: `${gap}px`,
-          flexDirection: options.direction ?? "row",
-          flexWrap: options.wrap ?? "wrap",
-          justifyContent: options.justifyContent ?? "center",
-          alignItems: options.alignItems ?? "center",
-          ["--stretch"]: options.justifyContent === "stretch" ? "100%" : "false",
-          ["--gap"]: `${gap}px`,
-          padding: `${padding}px`,
-          margin: `${margin}px`
-        }
-      }
-    );
+    return /* @__PURE__ */ jsx(DropZone, { ref: dragRef, minEmptyHeight: 200, zone: "layout", style: {
+      gap: `${gap}px`,
+      flexDirection: options.direction ?? "row",
+      flexWrap: options.wrap ?? "wrap",
+      justifyContent: options.justifyContent ?? "center",
+      alignItems: options.alignItems ?? "center",
+      ["--stretch"]: options.justifyContent === "stretch" ? "100%" : "false",
+      ["--gap"]: `${gap}px`,
+      padding: `${padding}px`,
+      margin: `${margin}px`
+    } });
   }
 };
 

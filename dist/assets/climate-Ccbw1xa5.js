@@ -1,5 +1,5 @@
-import { importShared } from './__federation_fn_import-Cbj1D39_.js';
-import { t as te, r as re, e as ee, T, Q } from './index-D38eh1Gu.js';
+import { importShared } from './__federation_fn_import-D9ReRsJu.js';
+import { t as te, r as re, e as ee, T, Q } from './index-CvosAy3g.js';
 
 const {useHass:w,isUnavailableState:x,computeAttributeValueDisplay:N,computeStateDisplay:E,localize:d,OFF:$} = await importShared('@hakit/core');
 

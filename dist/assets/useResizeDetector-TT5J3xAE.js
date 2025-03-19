@@ -1,4 +1,4 @@
-import { importShared } from './__federation_fn_import-Cbj1D39_.js';
+import { importShared } from './__federation_fn_import-D9ReRsJu.js';
 import { c as commonjsGlobal, g as getDefaultExportFromCjs } from './_commonjsHelpers-BFTU3MAI.js';
 
 /**

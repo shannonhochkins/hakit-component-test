@@ -1,4 +1,4 @@
-import { importShared } from './__federation_fn_import-Cbj1D39_.js';
+import { importShared } from './__federation_fn_import-D9ReRsJu.js';
 
 function _extends() {
   return _extends = Object.assign ? Object.assign.bind() : function (n) {
@@ -21,4 +21,4 @@ var useInsertionEffect = React['useInsertion' + 'Effect'] ? React['useInsertion'
 var useInsertionEffectAlwaysWithSyncFallback = useInsertionEffect || syncFallback;
 var useInsertionEffectWithLayoutFallback = useInsertionEffect || React.useLayoutEffect;
 
-export { _extends as _, useInsertionEffectWithLayoutFallback as a, useInsertionEffectAlwaysWithSyncFallback as u };
+export { _extends as _, useInsertionEffectAlwaysWithSyncFallback as a, useInsertionEffectWithLayoutFallback as u };

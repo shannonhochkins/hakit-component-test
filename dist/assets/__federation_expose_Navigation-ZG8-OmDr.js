@@ -1,98 +1,51 @@
-import { j as jsxRuntimeExports } from './jsx-runtime-XI9uIe3W.js';
-import { importShared } from './__federation_fn_import-Cbj1D39_.js';
+import { j as jsx, a as jsxs } from './emotion-react-jsx-runtime.browser.esm-DGwdlQJW.js';
+import { importShared } from './__federation_fn_import-D9ReRsJu.js';
+import { c as createStyled } from './emotion-styled-base.browser.esm-U9y8z5J2.js';
 
 const {TimeCard} = await importShared('@hakit/components');
 
-const styled$1 = await importShared('@emotion/styled');
-
-const NavigationClock = styled$1(TimeCard)`
-  &.card-base {
-    border: none;
-    background: transparent;
-    &:hover,
-    &:focus {
-      &:not(:disabled) {
-        background: transparent;
-      }
-    }
-    div:has(h4) {
-      > h4 {
-        white-space: nowrap;
-      }
-    }
-  }
-`;
-
-const styled = await importShared('@emotion/styled');
+const NavigationClock = /* @__PURE__ */ createStyled(TimeCard, {
+  target: "e1nnemuf0"
+} )({
+  name: "1l04ghp",
+  styles: "&.card-base{border:none;background:transparent;&:hover,&:focus{&:not(:disabled){background:transparent;}}div:has(h4){>h4{white-space:nowrap;}}}"
+} );
 
 const {Row,FabCard,Menu} = await importShared('@hakit/components');
-const Nav = styled.nav`
-  display: flex;
-  padding: 1rem;
-`;
-const Link = styled.a`
-  color: rgba(255, 255, 255, 0.4);
-  padding: 1rem 2rem;
-  transition: color var(--ha-transition-duration) var(--ha-easing);
-  cursor: pointer;
-  &:hover,
-  &:focus {
-    color: rgba(255, 255, 255, 0.8);
-  }
-  &.active {
-    color: rgba(255, 255, 255, 1);
-  }
-`;
-const TransparentFabCard = styled(FabCard)`
-  &.card-base {
-    border: none;
-    background: transparent;
-  }
-`;
-function NavigationBar({ options, clockOptions, ...props }) {
+const Nav = /* @__PURE__ */ createStyled("nav", {
+  target: "e173196a2"
+} )({
+  name: "zedglk",
+  styles: "display:flex;padding:1rem"
+} );
+const Link = /* @__PURE__ */ createStyled("a", {
+  target: "e173196a1"
+} )({
+  name: "14mquk0",
+  styles: "color:rgba(255, 255, 255, 0.4);padding:1rem 2rem;transition:color var(--ha-transition-duration) var(--ha-easing);cursor:pointer;&:hover,&:focus{color:rgba(255, 255, 255, 0.8);}&.active{color:rgba(255, 255, 255, 1);}"
+} );
+const TransparentFabCard = /* @__PURE__ */ createStyled(FabCard, {
+  target: "e173196a0"
+} )({
+  name: "1qbnqhg",
+  styles: "&.card-base{border:none;background:transparent;}"
+} );
+function NavigationBar({
+  options,
+  clockOptions,
+  ...props
+}) {
   const pages = [];
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, { ...props, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Row, { fullWidth: true, wrap: "nowrap", justifyContent: "space-between", children: [
-    !options?.hideClock && /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-      NavigationClock,
-      {
-        timeEntity: clockOptions?.timeEntity,
-        dateEntity: clockOptions?.dateEntity,
-        dateFormat: clockOptions?.hideDate || clockOptions?.useDateEntity ? void 0 : clockOptions?.dateFormat,
-        timeFormat: clockOptions?.hideTime || clockOptions?.useTimeEntity ? void 0 : clockOptions?.timeFormat,
-        hideDate: clockOptions?.hideDate,
-        hideTime: clockOptions?.hideTime,
-        hideIcon: clockOptions?.hideIcon,
-        throttleTime: clockOptions?.useDateEntity || clockOptions?.useTimeEntity ? void 0 : clockOptions?.throttleTime,
-        icon: clockOptions?.icon,
-        disableColumns: true,
-        disableRipples: true,
-        disableScale: true,
-        center: false,
-        xxs: 12,
-        xs: 12,
-        sm: 12,
-        md: 12,
-        lg: 12,
-        xlg: 12
+  return /* @__PURE__ */ jsx(Nav, { ...props, children: /* @__PURE__ */ jsxs(Row, { fullWidth: true, wrap: "nowrap", justifyContent: "space-between", children: [
+    !options?.hideClock && /* @__PURE__ */ jsx(Row, { children: /* @__PURE__ */ jsx(NavigationClock, { timeEntity: clockOptions?.timeEntity, dateEntity: clockOptions?.dateEntity, dateFormat: clockOptions?.hideDate || clockOptions?.useDateEntity ? void 0 : clockOptions?.dateFormat, timeFormat: clockOptions?.hideTime || clockOptions?.useTimeEntity ? void 0 : clockOptions?.timeFormat, hideDate: clockOptions?.hideDate, hideTime: clockOptions?.hideTime, hideIcon: clockOptions?.hideIcon, throttleTime: clockOptions?.useDateEntity || clockOptions?.useTimeEntity ? void 0 : clockOptions?.throttleTime, icon: clockOptions?.icon, disableColumns: true, disableRipples: true, disableScale: true, center: false, xxs: 12, xs: 12, sm: 12, md: 12, lg: 12, xlg: 12 }) }),
+    /* @__PURE__ */ jsx(Row, { fullWidth: true, gap: "1rem", children: pages.map((page) => /* @__PURE__ */ jsx(Link, { className: page.active ? "active" : "", children: page.title }, page.id)) }),
+    /* @__PURE__ */ jsx(Row, { children: /* @__PURE__ */ jsx(Menu, { items: [{
+      active: true,
+      icon: "mdi:edit",
+      label: "Edit",
+      onClick: () => {
       }
-    ) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { fullWidth: true, gap: "1rem", children: pages.map((page) => /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { className: page.active ? "active" : "", children: page.title }, page.id)) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Row, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Menu,
-      {
-        items: [
-          {
-            active: true,
-            icon: "mdi:edit",
-            label: "Edit",
-            onClick: () => {
-            }
-          }
-        ],
-        placement: "bottom",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(TransparentFabCard, { icon: "mdi:dots-vertical" })
-      }
-    ) })
+    }], placement: "bottom", children: /* @__PURE__ */ jsx(TransparentFabCard, { icon: "mdi:dots-vertical" }) }) })
   ] }) });
 }
 
@@ -117,10 +70,13 @@ const index = {
           type: "radio",
           label: "Hide Clock",
           description: "Hide the clock in the navigation bar",
-          options: [
-            { label: "Yes", value: true },
-            { label: "No", value: false }
-          ],
+          options: [{
+            label: "Yes",
+            value: true
+          }, {
+            label: "No",
+            value: false
+          }],
           default: false
         }
       }
@@ -138,20 +94,26 @@ const index = {
           type: "radio",
           label: "Hide Time",
           description: "Hide the time in the clock",
-          options: [
-            { label: "Yes", value: true },
-            { label: "No", value: false }
-          ],
+          options: [{
+            label: "Yes",
+            value: true
+          }, {
+            label: "No",
+            value: false
+          }],
           default: false
         },
         useTimeEntity: {
           type: "radio",
           label: "Use Time Entity",
           description: "Use a time entity from your home assistant instance",
-          options: [
-            { label: "Yes", value: true },
-            { label: "No", value: false }
-          ],
+          options: [{
+            label: "Yes",
+            value: true
+          }, {
+            label: "No",
+            value: false
+          }],
           default: true
         },
         timeEntity: {
@@ -184,20 +146,26 @@ const index = {
           type: "radio",
           label: "Hide Date",
           description: "Hide the date in the clock",
-          options: [
-            { label: "Yes", value: true },
-            { label: "No", value: false }
-          ],
+          options: [{
+            label: "Yes",
+            value: true
+          }, {
+            label: "No",
+            value: false
+          }],
           default: true
         },
         useDateEntity: {
           type: "radio",
           label: "Use Date Entity",
           description: "Use a date entity from your home assistant instance",
-          options: [
-            { label: "Yes", value: true },
-            { label: "No", value: false }
-          ],
+          options: [{
+            label: "Yes",
+            value: true
+          }, {
+            label: "No",
+            value: false
+          }],
           default: true
         },
         dateEntity: {
@@ -224,10 +192,13 @@ const index = {
           type: "radio",
           label: "Hide Icon",
           description: "Hide the icon in the clock",
-          options: [
-            { label: "Yes", value: true },
-            { label: "No", value: false }
-          ],
+          options: [{
+            label: "Yes",
+            value: true
+          }, {
+            label: "No",
+            value: false
+          }],
           default: true
         },
         icon: {
@@ -281,10 +252,18 @@ const index = {
     }
     return fields;
   },
-  permissions: { delete: true, drag: true, duplicate: false },
+  permissions: {
+    delete: true,
+    drag: true,
+    duplicate: false
+  },
   inline: true,
-  render({ dragRef, options, clockOptions }) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(NavigationBar, { clockOptions, options, ref: dragRef });
+  render({
+    dragRef,
+    options,
+    clockOptions
+  }) {
+    return /* @__PURE__ */ jsx(NavigationBar, { clockOptions, options, ref: dragRef });
   }
 };
 
