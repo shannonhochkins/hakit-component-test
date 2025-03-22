@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import { CSSProperties } from 'react';
+const defaultBackground = new URL('./default-background.jpg', import.meta.url).href;
+
 
 const BackgroundElement = styled.div<BackgroundProps['options']>`
   width: 100%;
@@ -133,7 +135,7 @@ export default {
         <BackgroundElement
           blendMode={options?.blendMode}
           backgroundColor={options?.backgroundColor}
-          backgroundImage={options?.backgroundImage ? `/assets/${options?.backgroundImage}` : ''}
+          backgroundImage={options?.backgroundImage ? `/assets/${options?.backgroundImage}` : defaultBackground}
           blur={options?.blur}
           opacity={options?.opacity}
         />

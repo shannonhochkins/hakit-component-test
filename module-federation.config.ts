@@ -5,6 +5,7 @@ export default createModuleFederationConfig({
   name,
   exposes: {
     './Navigation': './src/components/Navigation/index.tsx',
+    './Background': './src/components/Background/index.tsx',
     './Root': './src/components/Root/index.tsx',
   },
   shared: {
