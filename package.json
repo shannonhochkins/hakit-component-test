@@ -1,43 +1,45 @@
 {
-  "name": "hakit-component-test",
-  "private": true,
+  "name": "test",
   "version": "0.0.0",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite --port 5001 --strictPort",
-    "type-check": "tsc -b",
-    "build": "NODE_ENV=production vite build",
-    "watch:build": "NODE_ENV=production vite build --watch",
-    "lint": "eslint .",
-    "preview": "vite preview --port 5001 --strictPort",
-    "serve": "vite preview --port 5001 --strictPort"
+    "build": "rslib build",
+    "dev": "rslib build --watch",
+    "mf-dev": "rslib mf-dev"
   },
   "dependencies": {
-    "@hakit/components": "^5.0.8",
-    "@hakit/core": "^5.0.8",
-    "@measured/puck": "^0.18.2",
-    "framer-motion": "^12.5.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-resize-detector": "^12.0.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "react-resize-detector": "^12.0.2"
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.13.5",
-    "@eslint/js": "^9.21.0",
-    "@originjs/vite-plugin-federation": "^1.4.0",
-    "@stylexjs/babel-plugin": "^0.11.1",
-    "@stylexjs/postcss-plugin": "^0.11.1",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "@vanilla-extract/vite-plugin": "^5.0.1",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@hakit/components": "^5.0.9",
+    "@hakit/core": "^5.0.9",
+    "@module-federation/rsbuild-plugin": "^0.11.1",
+    "@rsbuild/core": "^1.2.15",
+    "@rsbuild/plugin-react": "^1.1.1",
+    "@rslib/core": ">=0.5.3",
+    "@types/node": "^22.13.9",
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",    
+    "typescript": "^5.7.3",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^15.15.0",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0"
+    "@eslint/js": "^9.21.0"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
   }
 }

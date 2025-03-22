@@ -52,10 +52,10 @@ export function toBreakpoints(viewports: ViewportItem[]): BreakPoints {
 
 
 
-export function useViewports(data) {
+export function useViewports(data: unknown) {
   const merged = useMemo(() => {
     const defaultBreakpoints = defaultViewports;
-    const breakpoints = data.root.props?.viewports ?? null;
+    const breakpoints = data?.root.props?.viewports ?? null;
     return breakpoints ? breakpoints : defaultBreakpoints;
   }, [data.root.props?.viewports]);
   return useMemo(() => merged, [merged]);
