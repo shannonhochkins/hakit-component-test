@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, useCallback, ComponentPropsWithoutRef } fr
 import { useResizeDetector } from 'react-resize-detector';
 import { FabCard } from '@hakit/components';
 import { type SliderProps } from '.';
-// import { DropZone } from '@measured/puck';
 // import { usePuckData } from '@editor/hooks/usePuckData';
 
 // const CardBase = styled(motion.div)`
