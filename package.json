@@ -15,28 +15,29 @@
   ],
   "scripts": {
     "build": "rslib build",
-    "dev": "rslib build --watch",
-    "mf-dev": "rslib mf-dev"
+    "dev": "rslib mf-dev"
   },
   "dependencies": {
-    "uuid": "^11.1.0",
-    "react-resize-detector": "^12.0.2"
+    "react-resize-detector": "^12.0.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@eslint/js": "^9.21.0",
     "@hakit/components": "^5.0.9",
     "@hakit/core": "^5.0.9",
     "@module-federation/rsbuild-plugin": "^0.11.1",
     "@rsbuild/core": "^1.2.15",
     "@rsbuild/plugin-react": "^1.1.1",
     "@rslib/core": ">=0.5.3",
+    "@swc/plugin-emotion": "^9.0.0",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.0",
-    "react": "^19.0.0",    
-    "typescript": "^5.7.3",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "@eslint/js": "^9.21.0"
+    "react": "^19.0.0",
+    "typescript": "^5.7.3"
   },
   "peerDependencies": {
     "react": ">=19.0.0",

@@ -42,6 +42,7 @@ const BackgroundWrapper = styled.div`
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  /* height: 100%; */
 `;
 
 interface BackgroundProps {
@@ -135,7 +136,7 @@ export default {
         <BackgroundElement
           blendMode={options?.blendMode}
           backgroundColor={options?.backgroundColor}
-          backgroundImage={options?.backgroundImage ? `/assets/${options?.backgroundImage}` : defaultBackground}
+          backgroundImage={options?.backgroundImage ? options?.backgroundImage : defaultBackground}
           blur={options?.blur}
           opacity={options?.opacity}
         />

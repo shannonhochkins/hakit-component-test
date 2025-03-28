@@ -4,8 +4,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { type ViewportItem } from './viewports';
 import { DEFAULT_THEME_OPTIONS } from '@hakit/components';
 import { useHass } from '@hakit/core';
-import { useViewports, toBreakpoints } from '../../hooks/useViewports';
-
+// import { useViewports, toBreakpoints } from '../../hooks/useViewports';
 
 export type DashboardItem = {
   title: string;
@@ -243,12 +242,12 @@ export default {
         //   key: 'css',
         //   container: iframe.contentDocument?.head,
         // }}
-        hue={data.root.props?.theme?.hue}
-        saturation={data.root.props?.theme?.saturation}
-        lightness={data.root.props?.theme?.lightness}
-        contrastThreshold={data.root.props?.theme?.contrastThreshold}
-        tint={data.root.props?.theme?.tint}
-        darkMode={data.root.props?.theme?.darkMode}
+        // hue={data.root.props?.theme?.hue}
+        // saturation={data.root.props?.theme?.saturation}
+        // lightness={data.root.props?.theme?.lightness}
+        // contrastThreshold={data.root.props?.theme?.contrastThreshold}
+        // tint={data.root.props?.theme?.tint}
+        // darkMode={data.root.props?.theme?.darkMode}
         globalStyles={`
         --ha-hide-body-overflow-y: hidden;
       `}>

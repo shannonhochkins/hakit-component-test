@@ -29,3 +29,6 @@ Then a Manifest link will be printed in the console, this should be the entry po
 
 All components exposed will be automatically loaded by the host application unless in the disabled list within hakit.
 
+
+### Emotion JS
+Nothing to do, should be handled by editor

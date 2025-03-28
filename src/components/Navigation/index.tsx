@@ -1,5 +1,8 @@
 import { FilterByDomain, type EntityName } from '@hakit/core';
 import { NavigationBar } from './NavigationBar';
+import { CacheProvider, withEmotionCache } from '@emotion/react'
+import createCache from '@emotion/cache';
+
 
 export type Slide = {
   label?: string;
@@ -213,8 +216,8 @@ export default {
   },
   permissions: { delete: true, drag: true, duplicate: false },
   inline: true,
-  render({ dragRef, options, clockOptions }) {
-    return <NavigationBar clockOptions={clockOptions} options={options} ref={dragRef} />;
+  render({ dragRef, options, clockOptions, editorFrame }) {
+    return <NavigationBar clockOptions={clockOptions} options={options} ref={dragRef} />
   },
 };
 

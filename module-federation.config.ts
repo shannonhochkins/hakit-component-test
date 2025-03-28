@@ -1,13 +1,12 @@
 import {createModuleFederationConfig} from '@module-federation/rsbuild-plugin';
-import { name, dependencies } from './package.json';
+import { name } from './package.json';
+import manifest from './manifest.json';
 
 export default createModuleFederationConfig({
   name,
-  exposes: {
-    './Navigation': './src/components/Navigation/index.tsx',
-    './Background': './src/components/Background/index.tsx',
-    './Root': './src/components/Root/index.tsx',
-  },
+  exposes: manifest.components.map(component => ({
+    [`./${component.name}`]: component.src
+  })),
   shared: {
     react: {
       eager: true,
@@ -22,6 +21,9 @@ export default createModuleFederationConfig({
       singleton: true,
     },
     '@measured/puck': {
+      singleton: true,
+    },
+    '@emotion/react': {
       singleton: true,
     },
   },

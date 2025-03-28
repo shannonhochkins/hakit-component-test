@@ -1,6 +1,23 @@
 {
   "homeAssistantVersion": "2023.7.0",
-  "componentPaths": [
-    "./dist/slider.js"
+  "components": [
+    {
+      "name": "Navigation",
+      "src": "./src/components/Navigation/index.tsx"
+    }, {
+      "name": "Background",
+      "src": "./src/components/Background/index.tsx"
+    },
+    {
+      "name": "Slider",
+      "src": "./src/components/Slider/index.tsx"
+    },
+    {
+      "name": "Root",
+      "src": "./src/components/Root/index.tsx"
+    }, {
+      "name": "Layout",
+      "src": "./src/components/Layout/index.tsx"
+    }
   ]
 }

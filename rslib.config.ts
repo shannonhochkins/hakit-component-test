@@ -48,5 +48,19 @@ export default defineConfig({
   server: {
     port: 3001,
   },
-  plugins: [pluginReact(), pluginModuleFederation(moduleFederationConfig)],
+  tools: {
+    swc: {
+      jsc: {
+        experimental: {
+          plugins: [['@swc/plugin-emotion', {}]],
+        },
+      },
+    },
+  },
+  plugins: [
+    pluginReact({
+      swcReactOptions: {
+        importSource: '@emotion/react',
+      }
+    }), pluginModuleFederation(moduleFederationConfig)],
 });
