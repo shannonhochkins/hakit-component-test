@@ -32,11 +32,12 @@ const TransparentFabCard = styled(FabCard)`
   }
 `;
 
-type NavigationBarProps = NavigationProps & React.ComponentPropsWithRef<'nav'> ;
+type NavigationBarProps = NavigationProps & React.ComponentPropsWithRef<'nav'> & {
+  // TODO - fix this with DashboardWithoutPageData
+  dashboard: unknown
+};
 
-export function NavigationBar({ options, clockOptions, ...props }: NavigationBarProps) {
-  // const [, setEditMode] = useEditMode();
-  const pages = []
+export function NavigationBar({ options, pages, clockOptions, ...props }: NavigationBarProps) {
   return (
     <Nav {...props}>
       <Row fullWidth wrap='nowrap' justifyContent='space-between'>
@@ -68,7 +69,7 @@ export function NavigationBar({ options, clockOptions, ...props }: NavigationBar
         <Row fullWidth gap='1rem'>
           {pages.map(page => (
             <Link className={page.active ? 'active' : ''} key={page.id}>
-              {page.title}
+              {page.name}
             </Link>
           ))}
         </Row>

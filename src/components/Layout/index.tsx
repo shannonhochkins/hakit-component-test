@@ -65,6 +65,9 @@ export default {
           label: 'Direction',
           description: 'Controls if the children should be laid out horizontally or vertically',
           options: DIRECTION,
+          visible(data: LayoutProps) {
+            return true;
+          }
         },
         alignItems: {
           type: 'select',
@@ -110,14 +113,16 @@ export default {
     },
   },
   inline: true,
-  render: ({ dragRef, DropZone, options, activeBreakpoint, sizeOptions }) => {
+  render: (props) => {
+    console.log('Layout props', props);
+    const { puck, dropZone: DropZone, options, activeBreakpoint, sizeOptions } = props;
     // const { styles, className } = dataToTheme(sizeOptions, activeBreakpoint);
     const gap = options.gap ?? 0;
     const padding = options.padding ?? 0;
     const margin = options.margin ?? 0;
     return (
       <DropZone
-        ref={dragRef}
+        ref={puck.dragRef}
         minEmptyHeight={200}
         zone={'layout'}
         style={{

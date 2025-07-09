@@ -1,5 +1,5 @@
 import {createModuleFederationConfig} from '@module-federation/rsbuild-plugin';
-import { name } from './package.json';
+import { name, version } from './package.json';
 import manifest from './manifest.json';
 
 export default createModuleFederationConfig({
@@ -7,12 +7,14 @@ export default createModuleFederationConfig({
   exposes: manifest.components.map(component => ({
     [`./${component.name}`]: component.src
   })),
+  getPublicPath: `function() { return 'http://localhost:3001/${name}-v${version}/'; }`,
   shared: {
     react: {
       eager: true,
     },
     'react-dom': {
       eager: true,
+      
     },
     '@hakit/core': {
       singleton: true,

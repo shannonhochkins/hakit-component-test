@@ -167,8 +167,6 @@ export const ContextSlider = ({
   } = options;
   // TODO assess if this is necessary to be on individual slides
   const dragDirection = useRef(0);
-  // const puckData = usePuckData();
-  // console.log('puckData', puckData);
 
   const [[activeIndex, direction], setActiveIndex] = useState([0, 0]);
   const [widths, setWidths] = useState<number[]>([]);

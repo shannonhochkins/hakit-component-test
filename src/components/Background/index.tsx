@@ -74,6 +74,16 @@ export default {
         open: true,
       },
       objectFields: {
+        useBackgroundImage: {
+          type: 'radio',
+          label: 'Use Background Image',
+          description: 'Whether to use a background image or not',
+          options: [
+            { label: 'Yes', value: true },
+            { label: 'No', value: false },
+          ],
+          default: true,
+        },
         backgroundImage: {
           type: 'imageUpload',
           label: 'Background Image',
@@ -136,7 +146,7 @@ export default {
         <BackgroundElement
           blendMode={options?.blendMode}
           backgroundColor={options?.backgroundColor}
-          backgroundImage={options?.backgroundImage ? options?.backgroundImage : defaultBackground}
+          backgroundImage={options?.useBackgroundImage ? options?.backgroundImage ? options?.backgroundImage : defaultBackground : undefined}
           blur={options?.blur}
           opacity={options?.opacity}
         />

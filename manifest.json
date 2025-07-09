@@ -4,9 +4,6 @@
     {
       "name": "Navigation",
       "src": "./src/components/Navigation/index.tsx"
-    }, {
-      "name": "Background",
-      "src": "./src/components/Background/index.tsx"
     },
     {
       "name": "Slider",
@@ -18,6 +15,10 @@
     }, {
       "name": "Layout",
       "src": "./src/components/Layout/index.tsx"
+    },
+    {
+      "name": "FieldTest",
+      "src": "./src/components/FieldTest/index.tsx"
     }
   ]
 }

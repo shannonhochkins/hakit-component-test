@@ -1,231 +1,201 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ThemeProvider } from '@hakit/components';
 import { useEffect, useMemo, useRef } from 'react';
-import { type ViewportItem } from './viewports';
-import { DEFAULT_THEME_OPTIONS } from '@hakit/components';
+import { CSSProperties } from 'react';
 import { useHass } from '@hakit/core';
-// import { useViewports, toBreakpoints } from '../../hooks/useViewports';
+import styled from '@emotion/styled';
 
-export type DashboardItem = {
-  title: string;
-  id: string | null;
-};
+const defaultBackground = new URL('./default-background.jpg', import.meta.url).href;
+interface BackgroundProps {
+  /** the background image to apply to the dashboard @default defaultBackground */
+  backgroundImage?: string;
+  /** the background color to apply to the background overlay color @default "#4254c5" */
+  backgroundColor?: string;
+  /** the blend mode to apply to the background overlay color, this essentially applies an effect to the image @default "multiply" */
+  blendMode?: CSSProperties['mixBlendMode'];
+  /** the blur amount to apply to the background image of the dashboard @default 15 */
+  blur?: number;
+  /** the opacity of the background overlay color @default 0.9 */
+  opacity?: number;
 
+  test?: string;
+}
+
+
+const BackgroundElement = styled.div<BackgroundProps>`
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* pointer-events: none;   */
+  filter: ${({ blur }) => (blur ? `blur(${blur}px)` : 'none')};
+  ${({ backgroundImage, backgroundColor, opacity, blendMode }) => `
+    ${backgroundImage ? `background-image: url(${backgroundImage});` : ''}
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      opacity: ${opacity};
+      background: ${backgroundColor};
+      mix-blend-mode: ${blendMode};
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top center, ${backgroundColor} 0%, rgba(255, 255, 255, 0) 100%);
+      width: 80vw;
+      height: 80vh;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      mix-blend-mode: color-dodge;
+    }
+  `}
+`;
+
+const BackgroundWrapper = styled.div`
+  position: absolute !important;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* height: 100%; */
+`;
 export type RootProps = {
-  dashboards: DashboardItem[];
-  viewports: ViewportItem[];
-  theme?: {
-    hue?: number;
-    darkMode?: boolean;
-    tint?: number;
-    saturation?: number;
-    lightness?: number;
-    contrastThreshold?: number;
-  };
+  background: BackgroundProps;
 };
 
 export default {
   label: 'Root',
-  category: 'other',
   withSizeOptions: false,
   fields: {
-    dashboards: {
-      type: 'array',
-      default: [],
-      collapsible: {
-        open: true,
-      },
-      getItemSummary: (item, i) => item.title || `Dashboard #${i}`,
-      defaultItemProps: {
-        title: 'Dashboard',
-        id: null,
-      },
-      arrayFields: {
-        title: {
-          type: 'text',
-          label: 'Dashboard Title',
-          default: 'Dashboard',
-          disableBreakpoints: true,
-        },
-        id: {
-          type: 'hidden',
-        },
-      },
-      label: 'Manage Dashboards',
-      disableBreakpoints: true,
-      description: 'Add an entirely new dashboard',
-    },
-    viewports: {
-      type: 'array',
-      default: [],
-      collapsible: {
-        open: false,
-      },
-      min: 5,
-      max: 5,
-      getItemSummary: (item, i) => item.label || `Viewport #${i}`,
-      defaultItemProps: {
-        label: 'Viewport',
-        width: 0,
-        disabled: false,
-      },
-      disableBreakpoints: true,
-      arrayFields: {
-        label: {
-          type: 'hidden',
-        },
-        width: {
-          type: 'number',
-          label: 'Viewport Width',
-          default: '',
-          disableBreakpoints: true,
-        },
-        disabled: {
-          disableBreakpoints: true,
-          type: 'radio',
-          default: false,
-          label: 'Behavior',
-          options: [
-            {
-              label: 'Enabled',
-              value: false,
-            },
-            {
-              label: 'Disabled',
-              value: true,
-            },
-          ],
-        },
-      },
-      label: 'Manage Viewports',
-      description: 'Configure viewports',
-    },
-    theme: {
+    background: {
       type: 'object',
+      label: 'Background options',
+      description: 'General options for the main background',
       default: {},
-      label: 'Theme Options',
       disableBreakpoints: true,
       collapsible: {
         open: true,
       },
-      description: 'Main theme controls for the dashboard',
       objectFields: {
-        hue: {
-          type: 'slider',
-          default: DEFAULT_THEME_OPTIONS.hue,
-          label: 'Hue',
-          description: 'Change the overall hue of the colors',
-          min: 0,
-          max: 360,
-          step: 1,
-          disableBreakpoints: true,
-        },
-        darkMode: {
+        useBackgroundImage: {
           type: 'radio',
-          default: DEFAULT_THEME_OPTIONS.darkMode,
-          label: 'Dark Mode',
-          description: 'Toggle dark mode',
+          label: 'Use Background Image',
+          description: 'Whether to use a background image or not',
           options: [
-            {
-              label: 'Enabled',
-              value: true,
-            },
-            {
-              label: 'Disabled',
-              value: false,
-            },
+            { label: 'Yes', value: true },
+            { label: 'No', value: false },
           ],
-          disableBreakpoints: true,
+          default: true,
         },
-        tint: {
-          type: 'slider',
-          default: DEFAULT_THEME_OPTIONS.tint,
-          label: 'Shade Tint',
-          description: 'Will change the hue tint for the shade colors',
+        backgroundImage: {
+          type: 'imageUpload',
+          label: 'Background Image',
+          description: 'The entity to display in the button card',
+          default: undefined,
+          visible(data) {
+            return data.background?.useBackgroundImage;
+          }
+        },
+        backgroundColor: {
+          type: 'color',
+          label: 'Background Color',
+          description: 'The background color of the button card',
+          default: '#4254c5',
+        },
+        blendMode: {
+          type: 'select',
+          label: 'Blend Mode',
+          description: 'The blend mode to apply to the background overlay color',
+          default: 'multiply',
+          options: [
+            { label: 'Color', value: 'color' },
+            { label: 'Color Burn', value: 'color-burn' },
+            { label: 'Color Dodge', value: 'color-dodge' },
+            { label: 'Darken', value: 'darken' },
+            { label: 'Difference', value: 'difference' },
+            { label: 'Exclusion', value: 'exclusion' },
+            { label: 'Hard Light', value: 'hard-light' },
+            { label: 'Hue', value: 'hue' },
+            { label: 'Lighten', value: 'lighten' },
+            { label: 'Luminosity', value: 'luminosity' },
+            { label: 'Multiply', value: 'multiply' },
+            { label: 'Normal', value: 'normal' },
+            { label: 'Overlay', value: 'overlay' },
+            { label: 'Saturation', value: 'saturation' },
+            { label: 'Screen', value: 'screen' },
+            { label: 'Soft Light', value: 'soft-light' },
+          ],
+        },
+        blur: {
+          type: 'number',
+          label: 'Blur',
+          min: 0,
+          description: 'The blur amount to apply to the background image of the dashboard',
+          default: 25,
+        },
+        opacity: {
+          type: 'number',
+          label: 'Opacity',
+          description: 'The opacity of the background overlay color',
+          default: 0.9,
           min: 0,
           max: 1,
-          step: 0.05,
-          disableBreakpoints: true,
-        },
-        saturation: {
-          type: 'slider',
-          default: DEFAULT_THEME_OPTIONS.saturation,
-          label: 'Saturation',
-          description: 'Control the saturation of the color',
-          min: 0,
-          max: 100,
-          step: 1,
-          disableBreakpoints: true,
-        },
-        lightness: {
-          type: 'slider',
-          default: DEFAULT_THEME_OPTIONS.lightness,
-          label: 'Lightness',
-          description: 'Control how bright the primary colors are',
-          min: 0,
-          max: 100,
-          step: 1,
-          disableBreakpoints: true,
-        },
-        contrastThreshold: {
-          type: 'slider',
-          default: DEFAULT_THEME_OPTIONS.contrastThreshold,
-          label: 'Contrast Threshold',
-          description: 'Changes output calculation for text color',
-          min: 0,
-          max: 100,
-          step: 1,
-          disableBreakpoints: true,
+          step: 0.1,
         },
       },
-    },
-  },
-  resolveData: async data => {
-    const props = data.props;
-    let lastId: string | null = null;
-    if (props?.dashboards) {
-      const shallowCopy = [...props.dashboards].map(dashboard => ({ ...dashboard }));;
-      // for (const dashboard of shallowCopy) {
-      //   if (dashboard.id === lastId && dashboard.id) {
-      //     // If the ID is the same as the previous ID, we're likely cloning the item
-      //     const clonedDashboard: { id: string } = await callApi('/api/page/configuration/clone', {
-      //       id: dashboard.id,
-      //     });
-      //     dashboard.id = clonedDashboard.id;
-      //   }
-      //   lastId = dashboard.id;
-      //   // no ID because the default is null
-      //   if (!dashboard.id) {
-      //     const newDashboard = await callApi('/api/page/configuration/new');
-      //     dashboard.id = newDashboard.id;
-      //   }
-      // }
-      props.dashboards = shallowCopy;
     }
-
-    return { ...data };
   },
-  render({ DropZone, editMode, data, editorFrame }) {
+  // resolveData: async data => {
+  //   const props = data.props;
+  //   let lastId: string | null = null;
+  //   if (props?.dashboards) {
+  //     const shallowCopy = [...props.dashboards].map(dashboard => ({ ...dashboard }));;
+  //     // for (const dashboard of shallowCopy) {
+  //     //   if (dashboard.id === lastId && dashboard.id) {
+  //     //     // If the ID is the same as the previous ID, we're likely cloning the item
+  //     //     const clonedDashboard: { id: string } = await callApi('/api/page/configuration/clone', {
+  //     //       id: dashboard.id,
+  //     //     });
+  //     //     dashboard.id = clonedDashboard.id;
+  //     //   }
+  //     //   lastId = dashboard.id;
+  //     //   // no ID because the default is null
+  //     //   if (!dashboard.id) {
+  //     //     const newDashboard = await callApi('/api/page/configuration/new');
+  //     //     dashboard.id = newDashboard.id;
+  //     //   }
+  //     // }
+  //     props.dashboards = shallowCopy;
+  //   }
+
+  //   return { ...data };
+  // },
+  render(props) {
+    const { editMode, _editor, background } = props;
+
     const { useStore } = useHass();
     const hasSetWindowContext = useRef(false);
     const setWindowContext = useStore(store => store.setWindowContext);
     const windowContext = useStore(store => store.windowContext);
-    const container = editMode ? editorFrame : document.head;
-    // const viewports = useViewports(data);
-    // const breakpoints = useMemo(() => toBreakpoints(viewports), [viewports]);
+    const container = editMode ? _editor.iframe : document.head;
 
     useEffect(() => {
       const newWindowContext = (container as HTMLIFrameElement)?.contentWindow as Window;
       if (editMode && windowContext !== newWindowContext && hasSetWindowContext.current === false && typeof newWindowContext !== 'undefined' && newWindowContext) {
         setWindowContext(newWindowContext);
         hasSetWindowContext.current = true;
+        console.log('Setting window context', newWindowContext);
       }
     }, [container, editMode, windowContext, setWindowContext]);
 
     useEffect(() => {
       return () => {
         setWindowContext(window);
-        hasSetWindowContext.current = false;
+        // hasSetWindowContext.current = false;
       };
     }, [setWindowContext]);
 
@@ -236,8 +206,8 @@ export default {
       return <></>;
     }
     return <>
-      <ThemeProvider
-        // breakpoints={breakpoints}
+      {/* <ThemeProvider
+        breakpoints={breakpoints}
         // emotionCache={{
         //   key: 'css',
         //   container: iframe.contentDocument?.head,
@@ -250,15 +220,18 @@ export default {
         // darkMode={data.root.props?.theme?.darkMode}
         globalStyles={`
         --ha-hide-body-overflow-y: hidden;
-      `}>
-        <DropZone zone={'default-zone'} style={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          // stretch the children
-          alignItems: 'stretch',
-        }} />
-      </ThemeProvider>
+      `}> */}
+        {props.children}
+        <BackgroundWrapper>
+          <BackgroundElement
+            blendMode={background?.blendMode}
+            backgroundColor={background?.backgroundColor}
+            backgroundImage={background?.useBackgroundImage ? background?.backgroundImage ? background?.backgroundImage : defaultBackground : undefined}
+            blur={background?.blur}
+            opacity={background?.opacity}
+          />
+        </BackgroundWrapper>
+      {/* </ThemeProvider> */}
     </>
   },
 }

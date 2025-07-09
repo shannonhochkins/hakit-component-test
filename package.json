@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "exports": {
     ".": {
@@ -14,8 +14,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "rslib build",
-    "dev": "rslib mf-dev"
+    "build": "node scripts/build-mf.js",
+    "build:mf": "rslib build",
+    "build:cloud": "NODE_ENV=production node scripts/build-mf.js",
+    "dev": "rslib mf-dev",
+    "dev:build:server": "node scripts/serve-mf.js"
   },
   "dependencies": {
     "react-resize-detector": "^12.0.2",
@@ -28,11 +31,15 @@
     "@rsbuild/plugin-react": "^1.1.1",
     "@rslib/core": ">=0.5.3",
     "@swc/plugin-emotion": "^9.0.0",
+    "@types/archiver": "^6.0.3",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.0",
+    "archiver": "^7.0.1",
+    "cors": "^2.8.5",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "express": "^5.1.0",
     "react": "^19.0.0",
     "typescript": "^5.7.3"
   },

@@ -12,33 +12,33 @@ const shared = {
 
 export default defineConfig({
   lib: [
-    {
-      ...shared,
-      format: 'esm',
-      output: {
-        distPath: {
-          root: './dist/esm',
-        },
-      },
-    },
-    {
-      ...shared,
-      format: 'cjs',
-      output: {
-        distPath: {
-          root: './dist/cjs',
-        },
-      },
-    },
+    // {
+    //   ...shared,
+    //   format: 'esm',
+    //   output: {
+    //     distPath: {
+    //       root: './dist/esm',
+    //     },
+    //   },
+    // },
+    // {
+    //   ...shared,
+    //   format: 'cjs',
+    //   output: {
+    //     distPath: {
+    //       root: './dist/cjs',
+    //     },
+    //   },
+    // },
     {
       ...shared,
       format: 'mf',
       output: {
         // set unpkg cdn as assetPrefix if you want to publish
-        // assetPrefix:
-        //   process.env.NODE_ENV === 'production'
-        //     ? `https://unpkg.com/${pkg.name}@latest/dist/mf/`
-        //     : undefined,
+        assetPrefix:
+          process.env.NODE_ENV === 'production'
+            ? `http://localhost:3001/${pkg.name}-v${pkg.version}/`
+            : undefined,
         distPath: {
           root: './dist/mf',
         },
