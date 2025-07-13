@@ -67,7 +67,7 @@ export type RootProps = {
   background: BackgroundProps;
 };
 
-export default {
+export const config = {
   label: 'Root',
   withSizeOptions: false,
   fields: {
@@ -174,7 +174,10 @@ export default {
 
   //   return { ...data };
   // },
-  render(props) {
+  
+}
+
+export function Render(props) {
     const { editMode, _editor, background } = props;
 
     const { useStore } = useHass();
@@ -233,5 +236,4 @@ export default {
         </BackgroundWrapper>
       {/* </ThemeProvider> */}
     </>
-  },
-}
+  }

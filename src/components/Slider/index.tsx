@@ -22,7 +22,7 @@ export interface SliderProps {
 }
 
 
-export default {
+export const config = {
   category: 'Misc',
   label: 'Slider',
   version: '1.0.0',
@@ -124,9 +124,11 @@ export default {
     duplicate: false,
     insert: true,
   },
-  render({ dragRef, options, slides = [] }) {
-    const slidesWithId = slides
-      .filter(slide => slide.id && slide.id.length > 0);
-    return <ContextSlider options={options} slides={slidesWithId} ref={dragRef} />;
-  },
+  
+}
+
+export function Render({ dragRef, options, slides = [] }) {
+  const slidesWithId = slides
+    .filter(slide => slide.id && slide.id.length > 0);
+  return <ContextSlider options={options} slides={slidesWithId} ref={dragRef} />;
 }

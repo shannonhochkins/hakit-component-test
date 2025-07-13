@@ -30,7 +30,7 @@ function filterEntitiesByDomains(entities, ...domains) {
   return values.filter((entity) => domains.includes(entity.entity_id.split(".")[0]));
 }
 
-const config = {
+export const config = {
   category: 'Misc',
   label: 'Navigation',
   fields: {
@@ -205,9 +205,9 @@ const config = {
   },
   permissions: { delete: true, drag: true, duplicate: false },
   inline: true,
-  render({ puck, options, clockOptions }) {
-    return <NavigationBar clockOptions={clockOptions} options={options} ref={puck.dragRef} pages={options.pages} />
-  },
+  
 };
 
-export default config;
+export function Render({ puck, options, clockOptions }) {
+  return <NavigationBar clockOptions={clockOptions} options={options} ref={puck.dragRef} pages={options.pages} />
+};

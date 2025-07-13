@@ -12,26 +12,9 @@ const shared = {
 
 export default defineConfig({
   lib: [
-    // {
-    //   ...shared,
-    //   format: 'esm',
-    //   output: {
-    //     distPath: {
-    //       root: './dist/esm',
-    //     },
-    //   },
-    // },
-    // {
-    //   ...shared,
-    //   format: 'cjs',
-    //   output: {
-    //     distPath: {
-    //       root: './dist/cjs',
-    //     },
-    //   },
-    // },
     {
       ...shared,
+      bundle: false, // Module Federation works better in bundleless mode
       format: 'mf',
       output: {
         // set unpkg cdn as assetPrefix if you want to publish
@@ -48,6 +31,26 @@ export default defineConfig({
   
   server: {
     port: 3001,
+  },
+  performance: {
+    chunkSplit: {
+      strategy: 'single-vendor',
+      override: {
+        chunks: 'all',
+        minSize: 100000, // Increase minimum chunk size
+        maxSize: 500000, // Set maximum chunk size
+        cacheGroups: {
+          // Group all exposed components together
+          components: {
+            test: /src[\\/]components/,
+            name: 'components',
+            chunks: 'all',
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
   },
   tools: {
     swc: {

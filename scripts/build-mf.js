@@ -18,7 +18,7 @@ const distMfDir = path.join(rootDir, 'dist', 'mf');
 // Read package.json to get version
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 const version = packageJson.version;
-const zipFileName = `${packageJson.name}-v${version}.zip`;
+const zipFileName = `v${version}.zip`;
 const zipFilePath = path.join(versionsDir, zipFileName);
 
 const DEBUG_MODE = true;
@@ -67,18 +67,6 @@ function shouldExcludeFile(filePath) {
   return excludePatterns.some(pattern => pattern.test(filePath));
 }
 
-// Function to determine if a file should be kept in the zip
-function shouldKeepFile(fileName) {
-  // For now, keep all files - you can modify this function later to filter files
-  return true;
-  
-  // Future filtering logic can go here, for example:
-  // return fileName.startsWith('__federation') || 
-  //        fileName === 'mf-manifest.json' || 
-  //        fileName === 'mf-stats.json' ||
-  //        fileName === 'test.js';
-}
-
 // Function to get files from manifest and dist directory
 function getFilesToInclude() {
   const manifestPath = path.join(distMfDir, 'mf-manifest.json');
@@ -91,15 +79,11 @@ function getFilesToInclude() {
   const filesToInclude = new Set();
   
   // Always include the main entry files
-  if (shouldKeepFile('mf-manifest.json')) {
-    filesToInclude.add('mf-manifest.json');
-  }
-  if (shouldKeepFile('mf-stats.json')) {
-    filesToInclude.add('mf-stats.json');
-  }
+  filesToInclude.add('mf-manifest.json');
+  filesToInclude.add('mf-stats.json');
   
   // Add the main remote entry file (e.g., test.js)
-  if (manifest.metaData?.remoteEntry?.name && shouldKeepFile(manifest.metaData.remoteEntry.name)) {
+  if (manifest.metaData?.remoteEntry?.name) {
     filesToInclude.add(manifest.metaData.remoteEntry.name);
   }
   
@@ -112,18 +96,14 @@ function getFilesToInclude() {
           // Add sync JS files
           if (expose.assets.js.sync) {
             for (const file of expose.assets.js.sync) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
           
           // Add async JS files
           if (expose.assets.js.async) {
             for (const file of expose.assets.js.async) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
         }
@@ -133,18 +113,14 @@ function getFilesToInclude() {
           // Add sync CSS files
           if (expose.assets.css.sync) {
             for (const file of expose.assets.css.sync) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
           
           // Add async CSS files
           if (expose.assets.css.async) {
             for (const file of expose.assets.css.async) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
         }
@@ -160,16 +136,12 @@ function getFilesToInclude() {
         if (shared.assets.js) {
           if (shared.assets.js.sync) {
             for (const file of shared.assets.js.sync) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
           if (shared.assets.js.async) {
             for (const file of shared.assets.js.async) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
         }
@@ -178,16 +150,12 @@ function getFilesToInclude() {
         if (shared.assets.css) {
           if (shared.assets.css.sync) {
             for (const file of shared.assets.css.sync) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
           if (shared.assets.css.async) {
             for (const file of shared.assets.css.async) {
-              if (shouldKeepFile(file)) {
                 filesToInclude.add(file);
-              }
             }
           }
         }
@@ -206,9 +174,7 @@ function getFilesToInclude() {
       if (stat.isDirectory()) {
         addDirectoryFiles(filePath, relativePath);
       } else {
-        if (shouldKeepFile(relativePath)) {
           filesToInclude.add(relativePath);
-        }
       }
     }
   }
@@ -259,6 +225,15 @@ function createZipFile() {
       } else {
         log(`  ⚠️  File not found: ${fileName}`);
       }
+    }
+
+    // Add the root manifest.json file
+    const rootManifestPath = path.join(rootDir, 'manifest.json');
+    if (fs.existsSync(rootManifestPath)) {
+      archive.file(rootManifestPath, { name: 'manifest.json' });
+      log(`  📄 Added: manifest.json (from root)`);
+    } else {
+      log(`  ⚠️  Root manifest.json not found`);
     }
 
     archive.finalize();

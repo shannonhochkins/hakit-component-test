@@ -14,9 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "node scripts/build-mf.js",
+    "build": "NODE_ENV=production node scripts/build-mf.js",
     "build:mf": "rslib build",
-    "build:cloud": "NODE_ENV=production node scripts/build-mf.js",
     "dev": "rslib mf-dev",
     "dev:build:server": "node scripts/serve-mf.js"
   },

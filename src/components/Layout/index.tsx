@@ -45,7 +45,7 @@ export type LayoutProps = {
   };
 };
 
-export default {
+export const config = {
   label: 'Layout',
   category: 'Layout',
   fields: {
@@ -113,7 +113,10 @@ export default {
     },
   },
   inline: true,
-  render: (props) => {
+}
+
+
+export function Render(props) {
     console.log('Layout props', props);
     const { puck, dropZone: DropZone, options, activeBreakpoint, sizeOptions } = props;
     // const { styles, className } = dataToTheme(sizeOptions, activeBreakpoint);
@@ -138,5 +141,4 @@ export default {
         }}
       />
     );
-  },
 }

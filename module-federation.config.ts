@@ -10,23 +10,40 @@ export default createModuleFederationConfig({
   getPublicPath: `function() { return 'http://localhost:3001/${name}-v${version}/'; }`,
   shared: {
     react: {
-      eager: true,
+      singleton: true,
+      eager: false, // Don't bundle, expect from host
+      requiredVersion: false,
+      import: false, // Don't provide fallback
     },
     'react-dom': {
-      eager: true,
-      
+      singleton: true,
+      eager: false,
+      requiredVersion: false,
+      import: false,
     },
     '@hakit/core': {
       singleton: true,
+      eager: false,
+      requiredVersion: false,
+      import: false,
     },
     '@hakit/components': {
       singleton: true,
+      eager: false,
+      requiredVersion: false,
+      import: false,
     },
     '@measured/puck': {
       singleton: true,
+      eager: false,
+      requiredVersion: false,
+      import: false,
     },
     '@emotion/react': {
       singleton: true,
+      eager: false,
+      requiredVersion: false,
+      import: false,
     },
   },
 })

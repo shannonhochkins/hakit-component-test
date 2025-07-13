@@ -32,7 +32,7 @@ export type LayoutProps = {
   };
 };
 
-export default {
+export const config = {
   label: 'Field Test',
   fields: {
     text: {
@@ -155,12 +155,13 @@ export default {
       },
     },
   },
-  render: (props) => {
-    console.log('FieldTest render', props);
-    return (
-      <pre ref={props.dragRef}>
-        {JSON.stringify(props.options, null, 2)}
-      </pre>
-    );
-  },
+}
+
+export function Render(props) {
+  console.log('FieldTest render', props);
+  return (
+    <pre ref={props.dragRef}>
+      {JSON.stringify(props.options, null, 2)}
+    </pre>
+  );
 }
