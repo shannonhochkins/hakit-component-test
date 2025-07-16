@@ -5,9 +5,7 @@ import moduleFederationConfig from './module-federation.config';
 import pkg from './package.json';
 
 const shared = {
-  dts: {
-    bundle: false,
-  },
+  dts: false, // Disable type declaration generation
 };
 
 export default defineConfig({
@@ -17,11 +15,7 @@ export default defineConfig({
       bundle: false, // Module Federation works better in bundleless mode
       format: 'mf',
       output: {
-        // set unpkg cdn as assetPrefix if you want to publish
-        assetPrefix:
-          process.env.NODE_ENV === 'production'
-            ? `http://localhost:3001/${pkg.name}-v${pkg.version}/`
-            : undefined,
+        // No assetPrefix - use relative paths for dynamic hosting
         distPath: {
           root: './dist/mf',
         },

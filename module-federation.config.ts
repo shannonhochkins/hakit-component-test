@@ -2,12 +2,16 @@ import {createModuleFederationConfig} from '@module-federation/rsbuild-plugin';
 import { name, version } from './package.json';
 import manifest from './manifest.json';
 
+// Convert package name to valid JavaScript identifier
+const federationName = name.replace(/[@\/]/g, '_').replace(/-/g, '_');
+
 export default createModuleFederationConfig({
-  name,
+  name: federationName,
   exposes: manifest.components.map(component => ({
     [`./${component.name}`]: component.src
   })),
-  // getPublicPath: `function() { return '{{HAKIT_ASSET_PREFIX}}'; }`,
+  // Use relative paths for dynamic hosting
+  getPublicPath: `function() { return ''; }`,
   shared: {
     react: {
       singleton: true,

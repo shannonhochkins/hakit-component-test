@@ -1,6 +1,7 @@
 {
-  "name": "test",
-  "version": "0.1.1",
+  "name": "@hakit/test",
+  "description": "Test package for Hakit components",
+  "version": "0.1.2",
   "type": "module",
   "exports": {
     ".": {
