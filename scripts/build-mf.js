@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import { createWriteStream } from 'fs';
 import archiver from 'archiver';
 import readline from 'readline';
+import { createHash } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,11 +16,18 @@ const packageJsonPath = path.join(rootDir, 'package.json');
 const versionsDir = path.join(rootDir, 'versions');
 const distMfDir = path.join(rootDir, 'dist', 'mf');
 
-// Read package.json to get version
+// Read package.json and manifest.json
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+const manifest = JSON.parse(fs.readFileSync(path.join(rootDir, 'manifest.json'), 'utf8'));
 const version = packageJson.version;
 const zipFileName = `v${version}.zip`;
 const zipFilePath = path.join(versionsDir, zipFileName);
+
+// Generate the publicPathVar using the same logic as the config
+const federationName = packageJson.name.replace(/[@\/]/g, '_').replace(/-/g, '_');
+const manifestString = JSON.stringify(manifest) + version;
+const uniqueId = createHash('md5').update(manifestString).digest('hex').substring(0, 8);
+const publicPathVar = `__MF_${federationName}_${uniqueId}_PUBLIC_PATH__`;
 
 const DEBUG_MODE = true;
 
@@ -188,8 +196,8 @@ function getFilesToInclude() {
 }
 
 // Function to create zip file
-function createZipFile() {
-  return new Promise((resolve, reject) => {
+async function createZipFile() {
+  return new Promise(async (resolve, reject) => {
     log(`📦 Creating zip file: ${zipFileName}`);
     
     const output = createWriteStream(zipFilePath);
@@ -286,6 +294,8 @@ async function build() {
       log(`📍 Building with relative paths (no asset prefix)`);
     }
     
+    log(`🔑 Using deterministic ID: ${uniqueId} (publicPathVar: ${publicPathVar})`);
+    
     try {
       execSync('npx rslib build', { 
         stdio: 'inherit',
@@ -301,6 +311,23 @@ async function build() {
     // Check if build was successful
     if (!fs.existsSync(distMfDir)) {
       throw new Error('Module federation build failed - dist/mf directory not found');
+    }
+    
+    // Update mf-manifest.json to include publicPathVar
+    const mfManifestPath = path.join(distMfDir, 'mf-manifest.json');
+    if (fs.existsSync(mfManifestPath)) {
+      try {
+        const mfManifest = JSON.parse(fs.readFileSync(mfManifestPath, 'utf8'));
+        
+        // Add the publicPathVar directly - no need to parse function strings!
+        mfManifest.publicPathVar = publicPathVar;
+        
+        fs.writeFileSync(mfManifestPath, JSON.stringify(mfManifest, null, 2));
+        log(`✅ Updated mf-manifest.json with publicPathVar: ${publicPathVar}`);
+      } catch (error) {
+        log(`❌ Could not update mf-manifest.json: ${error.message}`, 'error');
+        throw new Error(`Failed to update mf-manifest.json: ${error.message}`);
+      }
     }
     
     // Create zip file
