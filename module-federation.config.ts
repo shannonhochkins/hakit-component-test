@@ -7,7 +7,7 @@ export default createModuleFederationConfig({
   exposes: manifest.components.map(component => ({
     [`./${component.name}`]: component.src
   })),
-  getPublicPath: `function() { return 'http://localhost:3001/${name}-v${version}/'; }`,
+  // getPublicPath: `function() { return '{{HAKIT_ASSET_PREFIX}}'; }`,
   shared: {
     react: {
       singleton: true,
