@@ -18,16 +18,16 @@ const distMfDir = path.join(rootDir, 'dist', 'mf');
 
 // Read package.json and manifest.json
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-const manifest = JSON.parse(fs.readFileSync(path.join(rootDir, 'manifest.json'), 'utf8'));
+// const manifest = JSON.parse(fs.readFileSync(path.join(rootDir, 'manifest.json'), 'utf8'));
 const version = packageJson.version;
 const zipFileName = `v${version}.zip`;
 const zipFilePath = path.join(versionsDir, zipFileName);
 
 // Generate the publicPathVar using the same logic as the config
-const federationName = packageJson.name.replace(/[@\/]/g, '_').replace(/-/g, '_');
-const manifestString = JSON.stringify(manifest) + version;
-const uniqueId = createHash('md5').update(manifestString).digest('hex').substring(0, 8);
-const publicPathVar = `__MF_${federationName}_${uniqueId}_PUBLIC_PATH__`;
+// const federationName = packageJson.name.replace(/[@\/]/g, '_').replace(/-/g, '_');
+// const manifestString = JSON.stringify(manifest) + version;
+// const uniqueId = createHash('md5').update(manifestString).digest('hex').substring(0, 8);
+// const publicPathVar = `__MF_${federationName}_${uniqueId}_PUBLIC_PATH__`;
 
 const DEBUG_MODE = true;
 
@@ -287,7 +287,7 @@ async function build() {
     // Set environment variables for build
     const env = { ...process.env };
     
-    log(`🔑 Using deterministic ID: ${uniqueId} (publicPathVar: ${publicPathVar})`);
+    // log(`🔑 Using deterministic ID: ${uniqueId} (publicPathVar: ${publicPathVar})`);
     
     try {
       execSync('npx rslib build', { 
@@ -307,21 +307,21 @@ async function build() {
     }
     
     // Update mf-manifest.json to include publicPathVar
-    const mfManifestPath = path.join(distMfDir, 'mf-manifest.json');
-    if (fs.existsSync(mfManifestPath)) {
-      try {
-        const mfManifest = JSON.parse(fs.readFileSync(mfManifestPath, 'utf8'));
+    // const mfManifestPath = path.join(distMfDir, 'mf-manifest.json');
+    // if (fs.existsSync(mfManifestPath)) {
+    //   try {
+    //     const mfManifest = JSON.parse(fs.readFileSync(mfManifestPath, 'utf8'));
         
-        // Add the publicPathVar directly - no need to parse function strings!
-        mfManifest.publicPathVar = publicPathVar;
+    //     // Add the publicPathVar directly - no need to parse function strings!
+    //     mfManifest.publicPathVar = publicPathVar;
         
-        fs.writeFileSync(mfManifestPath, JSON.stringify(mfManifest, null, 2));
-        log(`✅ Updated mf-manifest.json with publicPathVar: ${publicPathVar}`);
-      } catch (error) {
-        log(`❌ Could not update mf-manifest.json: ${error.message}`, 'error');
-        throw new Error(`Failed to update mf-manifest.json: ${error.message}`);
-      }
-    }
+    //     fs.writeFileSync(mfManifestPath, JSON.stringify(mfManifest, null, 2));
+    //     log(`✅ Updated mf-manifest.json with publicPathVar: ${publicPathVar}`);
+    //   } catch (error) {
+    //     log(`❌ Could not update mf-manifest.json: ${error.message}`, 'error');
+    //     throw new Error(`Failed to update mf-manifest.json: ${error.message}`);
+    //   }
+    // }
     
     // Create zip file
     await createZipFile();

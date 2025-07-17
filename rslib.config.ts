@@ -4,17 +4,15 @@ import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
 import moduleFederationConfig from './module-federation.config';
 import pkg from './package.json';
 
-const shared = {
-  dts: false, // Disable type declaration generation
-};
 
 export default defineConfig({
+  
   lib: [
     {
-      ...shared,
+      dts: false,
       format: 'mf',
       output: {
-        // No assetPrefix - use relative paths for dynamic hosting
+        assetPrefix: '{{{_HAKIT_ASSET_PREFIX_}}}',
         distPath: {
           root: './dist/mf',
         },

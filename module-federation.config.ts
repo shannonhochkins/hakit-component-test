@@ -17,8 +17,9 @@ export default createModuleFederationConfig({
   exposes: manifest.components.map(component => ({
     [`./${component.name}`]: component.src
   })),
+  dts: false,
   // Use dynamic public path from window variable
-  getPublicPath: `function() { return window['${publicPathVar}'] || './'; }`,
+  // getPublicPath: `function() { return window['${publicPathVar}'] || './'; }`,
   shared: {
     react: {
       singleton: true,
