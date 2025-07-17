@@ -6,10 +6,6 @@
       "src": "./src/components/Navigation/index.tsx"
     },
     {
-      "name": "Slider",
-      "src": "./src/components/Slider/index.tsx"
-    },
-    {
       "name": "Root",
       "src": "./src/components/Root/index.tsx"
     }, {

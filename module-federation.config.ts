@@ -13,6 +13,7 @@ const publicPathVar = `__MF_${federationName}_${uniqueId}_PUBLIC_PATH__`;
 
 export default createModuleFederationConfig({
   name: federationName,
+  library: { type: 'var', name: federationName },
   exposes: manifest.components.map(component => ({
     [`./${component.name}`]: component.src
   })),

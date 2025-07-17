@@ -287,13 +287,6 @@ async function build() {
     // Set environment variables for build
     const env = { ...process.env };
     
-    // If ASSET_PREFIX is provided, use it for the build
-    if (process.env.ASSET_PREFIX) {
-      log(`🌐 Using asset prefix: ${process.env.ASSET_PREFIX}`);
-    } else {
-      log(`📍 Building with relative paths (no asset prefix)`);
-    }
-    
     log(`🔑 Using deterministic ID: ${uniqueId} (publicPathVar: ${publicPathVar})`);
     
     try {

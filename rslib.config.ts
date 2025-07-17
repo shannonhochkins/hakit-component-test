@@ -12,7 +12,6 @@ export default defineConfig({
   lib: [
     {
       ...shared,
-      bundle: false, // Module Federation works better in bundleless mode
       format: 'mf',
       output: {
         // No assetPrefix - use relative paths for dynamic hosting
@@ -60,5 +59,7 @@ export default defineConfig({
       swcReactOptions: {
         importSource: '@emotion/react',
       }
-    }), pluginModuleFederation(moduleFederationConfig)],
+    }), pluginModuleFederation(moduleFederationConfig, {
+      environment: 'production',
+    })],
 });
